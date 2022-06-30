@@ -11,6 +11,7 @@ from flask import Flask, request, render_template, jsonify
 matplotlib.use('Agg')
 
 
+
 MODEL = None
 DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
@@ -33,6 +34,7 @@ def register_hook():
     hook_handles = []
 
     for layer in MODEL.modules():
+        print("Hi")
         if isinstance(layer, torch.nn.modules.conv.Conv2d):
             handle = layer.register_forward_hook(save_output)
             hook_handles.append(handle)
